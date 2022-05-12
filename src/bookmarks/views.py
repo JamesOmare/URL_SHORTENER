@@ -192,6 +192,7 @@ def redirect_to_url(short_url):
 
 @bookmarks.get('/stats')
 @jwt_required()
+@swag_from('../docs/bookmarks/stats.yaml')
 def get_status():
     current_user = get_jwt_identity()
 

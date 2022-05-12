@@ -1,3 +1,4 @@
+from tkinter import SW
 from flask import Flask
 from .auth.views import auth
 from .bookmarks.views import bookmarks
@@ -6,7 +7,7 @@ from .models.bookmark import Bookmark
 from .config.config import Config
 from werkzeug.exceptions import NotFound, MethodNotAllowed
 from .config.swagger import template, swagger_config
-from flasgger import Swagger, swagger_config
+from flasgger import Swagger
 
 
 def create_app(config = Config):
@@ -18,11 +19,8 @@ def create_app(config = Config):
 
     db.init_app(app)
     jwt_manager.init_app(app)
-
     Swagger(app, config = swagger_config, template = template)
-    # swagger.init_app(app)
-    # swagger(config = swagger_config, template = template )
-
+    
     app.register_blueprint(auth)
     app.register_blueprint(bookmarks)
 
